@@ -1,3 +1,6 @@
+#ifndef SINGLE_LINKED_NODE
+#define SINGLE_LINKED_NODE
+
 class SingleLinkedNode
 {
     private:
@@ -12,3 +15,5 @@ class SingleLinkedNode
         SingleLinkedNode* GetNextNode();
         int GetData();
 };
+
+#endif
