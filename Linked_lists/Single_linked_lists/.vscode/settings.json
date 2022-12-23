@@ -1,5 +1,5 @@
 {
-    "pathToFiles": "/home/jon/Desktop/scripts/C/C_Dynamic_Libraries_from_executable",
+    "pathToFiles": "/home/jon/Desktop/scripts/C++/Data_Structures/Linked_lists",
     "pathToSourceFiles": "${config:pathToFiles}/Source_files",
     "pathToExecutableFiles": "${config:pathToFiles}/Executable_files",
 }

@@ -1,0 +1,21 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Compile",
+            "command": "g++ *.cpp -o main",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "C/C++: gcc build main.c and add.c files. Generate test executable file and test it."
+        }
+    ],
+    "version": "2.0.0"
+}
