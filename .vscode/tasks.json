@@ -3,17 +3,14 @@
         {
             "type": "shell",
             "label": "Compile",
-            "command": "g++ *.cpp -o main",
+            "command": "g++ -g ${config:pathToSourceFiles}/* -o ${config:pathToExecutableFiles}/main",
             "options": {
                 "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "detail": "C/C++: gcc build main.c and add.c files. Generate test executable file and test it."
         }
     ],

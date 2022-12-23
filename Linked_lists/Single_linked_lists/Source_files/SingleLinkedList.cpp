@@ -52,10 +52,10 @@ void SingleLinkedlist::printList()
 
 void SingleLinkedlist::deleteNode(int nodeOffset)
 {
-    int linkedListLength = 0;
+    int linkedListLength = 1;
 
-    SingleLinkedNode* currentNode   = NULL;
-    SingleLinkedNode* previousNode  = NULL;
+    SingleLinkedNode* currentNode   = this->head;
+    SingleLinkedNode* previousNode();
 
     if(this->head == NULL)
     {
@@ -66,6 +66,7 @@ void SingleLinkedlist::deleteNode(int nodeOffset)
     while(currentNode->GetNextNode() != NULL)
     {
         linkedListLength++;
+        currentNode = currentNode->GetNextNode();
     }
 
     if(nodeOffset >= linkedListLength)
@@ -73,6 +74,8 @@ void SingleLinkedlist::deleteNode(int nodeOffset)
         std::cout << "Offset is out of boundaries!\n";
         return;
     }
+
+    currentNode   = this->head;
 
     for(int i = 0; i < nodeOffset; i++)
     {

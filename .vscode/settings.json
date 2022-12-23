@@ -1,5 +1,5 @@
 {
-    "pathToFiles": "/home/jon/Desktop/scripts/C++/Data_Structures/Linked_lists",
+    "pathToFiles": "/home/jon/Desktop/scripts/C++/Data_Structures/Linked_lists/Single_linked_lists",
     "pathToSourceFiles": "${config:pathToFiles}/Source_files",
     "pathToExecutableFiles": "${config:pathToFiles}/Executable_files",
 }

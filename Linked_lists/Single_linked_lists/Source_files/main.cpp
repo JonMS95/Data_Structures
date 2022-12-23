@@ -20,7 +20,7 @@ int main()
 
     testList.printList();
 
-    // testList.deleteNode(2);
+    testList.deleteNode(2);
 
     testList.printList();
 
