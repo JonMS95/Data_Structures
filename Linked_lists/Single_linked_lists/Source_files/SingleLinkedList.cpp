@@ -55,7 +55,7 @@ void SingleLinkedlist::deleteNode(int nodeOffset)
     int linkedListLength = 1;
 
     SingleLinkedNode* currentNode   = this->head;
-    SingleLinkedNode* previousNode();
+    SingleLinkedNode* previousNode;
 
     if(this->head == NULL)
     {
@@ -79,7 +79,7 @@ void SingleLinkedlist::deleteNode(int nodeOffset)
 
     for(int i = 0; i < nodeOffset; i++)
     {
-        previousNode->SetNextNode(currentNode);
+        previousNode = currentNode;
         currentNode = currentNode->GetNextNode();
     }
 
