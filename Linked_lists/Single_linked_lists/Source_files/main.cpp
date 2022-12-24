@@ -24,5 +24,21 @@ int main()
 
     testList.printList();
 
+    testList.deleteNode(0);
+
+    testList.printList();
+
+    testList.deleteNode(0);
+
+    testList.printList();
+
+    testList.deleteNode(0);
+
+    testList.printList();
+
+    testList.deleteNode(0);
+
+    testList.printList();
+
     return 0;
 }
