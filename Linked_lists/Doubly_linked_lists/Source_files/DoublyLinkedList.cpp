@@ -76,6 +76,7 @@ void DoublyLinkedList::DeleteNode(int offset)
 
     currentNode->GetPrevNode()->SetNextNode(currentNode->GetNextNode());
     currentNode->GetNextNode()->SetPrevNode(currentNode->GetPrevNode());
+    delete currentNode;
 }
 
 void DoublyLinkedList::PrintList()
