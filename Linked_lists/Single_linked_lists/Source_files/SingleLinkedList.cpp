@@ -34,7 +34,7 @@ void SingleLinkedlist::printList()
     //If the head of the list is null, then the list contains no element whatsoever.
     if(this->head == NULL)
     {
-        std::cout <<"List is empty!\n";
+        std::cout << "List is empty!\n";
         return;
     }
 
