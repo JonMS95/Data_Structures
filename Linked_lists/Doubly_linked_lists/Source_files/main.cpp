@@ -30,5 +30,9 @@ int main()
 
     testList.PrintList();
 
+    testList.DeleteNode(0);
+
+    testList.PrintList();
+
     return 0;
 }
