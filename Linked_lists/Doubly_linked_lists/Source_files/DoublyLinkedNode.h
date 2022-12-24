@@ -1,3 +1,6 @@
+#ifndef DOUBLY_LINKED_NODE
+#define DOUBLY_LINKED_NODE
+
 #include <iostream>
 
 class DoublyLinkedNode
@@ -17,3 +20,5 @@ public:
     DoublyLinkedNode* SetNextNode(DoublyLinkedNode* next);
     DoublyLinkedNode* SetPrevNode(DoublyLinkedNode* prev);
 };
+
+#endif
