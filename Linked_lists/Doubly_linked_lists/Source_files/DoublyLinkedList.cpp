@@ -23,6 +23,15 @@ void DoublyLinkedList::InsertFirstNode(int data)
 
 void DoublyLinkedList::InsertFinalNode(int data)
 {
+    DoublyLinkedNode* newNode = new DoublyLinkedNode(data, nullptr, nullptr);
+
+    // If list is currently empty:
+    if(this->head == nullptr)
+    {
+        this->head = newNode;
+        return;
+    }
+
     DoublyLinkedNode* currentNode = this->head;
 
     while(currentNode->GetNextNode() != nullptr)
@@ -30,7 +39,10 @@ void DoublyLinkedList::InsertFinalNode(int data)
         currentNode = currentNode->GetNextNode();
     }
 
-    DoublyLinkedNode* newNode = new DoublyLinkedNode(data, currentNode, nullptr);
+    newNode->SetPrevNode(currentNode);
+    newNode->GetPrevNode()->SetNextNode(newNode);
+
+    // DoublyLinkedNode* newNode = new DoublyLinkedNode(data, currentNode, nullptr);
 }
 
 void DoublyLinkedList::DeleteNode(int offset)
@@ -50,6 +62,13 @@ void DoublyLinkedList::DeleteNode(int offset)
         return;
     }
 
+    if(offset == 0)
+    {
+        this->head = this->head->GetNextNode();
+        delete currentNode;
+        return;
+    }
+
     for(int i = 0; i < offset; i++)
     {
         currentNode = currentNode->GetNextNode();
@@ -63,9 +82,15 @@ void DoublyLinkedList::PrintList()
 {
     DoublyLinkedNode* currentNode = this->head;
     
-    while(currentNode->GetNextNode() != nullptr)
+    if(this->head == nullptr)
+    {
+        std::cout << "List is empty!\n";
+    }
+
+    while(currentNode != nullptr)
     {
         std::cout << currentNode->GetData() << "\n";
+        currentNode = currentNode->GetNextNode();
     }
 }
 
