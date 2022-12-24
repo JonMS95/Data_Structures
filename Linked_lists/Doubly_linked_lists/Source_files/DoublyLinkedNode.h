@@ -10,6 +10,8 @@ public:
     DoublyLinkedNode();
     DoublyLinkedNode(int data, DoublyLinkedNode* next, DoublyLinkedNode* prev);
     ~DoublyLinkedNode();
+    int GetData();
+    void SetData(int data);
     DoublyLinkedNode* GetNextNode();
     DoublyLinkedNode* GetPrevNode();
     DoublyLinkedNode* SetNextNode(DoublyLinkedNode* next);

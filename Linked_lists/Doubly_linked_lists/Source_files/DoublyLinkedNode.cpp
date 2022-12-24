@@ -19,6 +19,16 @@ DoublyLinkedNode::~DoublyLinkedNode()
     std::cout << "Removed node!\n";
 }
 
+int DoublyLinkedNode::GetData()
+{
+    return this->data;
+}
+
+void DoublyLinkedNode::SetData(int data)
+{
+    this->data = data;
+}
+
 DoublyLinkedNode* DoublyLinkedNode::GetNextNode()
 {
     return this->next;
