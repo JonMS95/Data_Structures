@@ -88,6 +88,8 @@ void DoublyLinkedList::PrintList()
         std::cout << "List is empty!\n";
     }
 
+    std::cout << "*************\n";
+
     while(currentNode != nullptr)
     {
         std::cout << currentNode->GetData() << "\n";
