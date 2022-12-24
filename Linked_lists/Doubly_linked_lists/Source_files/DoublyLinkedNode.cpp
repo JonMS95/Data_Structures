@@ -7,11 +7,11 @@ DoublyLinkedNode::DoublyLinkedNode()
     this->prev = nullptr;
 }
 
-DoublyLinkedNode::DoublyLinkedNode(int data, DoublyLinkedNode* next, DoublyLinkedNode* prev)
+DoublyLinkedNode::DoublyLinkedNode(int data, DoublyLinkedNode* prev, DoublyLinkedNode* next)
 {
     this->data = data;
-    this->next = next;
     this->prev = prev;
+    this->next = next;
 }
 
 DoublyLinkedNode::~DoublyLinkedNode()
@@ -39,12 +39,12 @@ DoublyLinkedNode* DoublyLinkedNode::GetPrevNode()
     return this->prev;
 }
 
-DoublyLinkedNode* DoublyLinkedNode::SetNextNode(DoublyLinkedNode* next)
+void DoublyLinkedNode::SetNextNode(DoublyLinkedNode* next)
 {
     this->next = next;
 }
 
-DoublyLinkedNode* DoublyLinkedNode::SetPrevNode(DoublyLinkedNode* prev)
+void DoublyLinkedNode::SetPrevNode(DoublyLinkedNode* prev)
 {
     this->prev = prev;
 }

@@ -17,8 +17,8 @@ public:
     void SetData(int data);
     DoublyLinkedNode* GetNextNode();
     DoublyLinkedNode* GetPrevNode();
-    DoublyLinkedNode* SetNextNode(DoublyLinkedNode* next);
-    DoublyLinkedNode* SetPrevNode(DoublyLinkedNode* prev);
+    void SetNextNode(DoublyLinkedNode* next);
+    void SetPrevNode(DoublyLinkedNode* prev);
 };
 
 #endif
