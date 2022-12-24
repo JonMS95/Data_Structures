@@ -11,9 +11,11 @@ private:
 public:
     DoublyLinkedList();
     ~DoublyLinkedList();
-    void InsertNode(int data, int offset);
+    void InsertFirstNode(int data);
+    void InsertFinalNode(int data);
     void DeleteNode(int offset);
     void PrintList();
+    int  GetListLength();
 };
 
 #endif
