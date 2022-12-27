@@ -9,6 +9,7 @@ private:
     BinaryTreeNode* right;
 public:
     BinaryTreeNode();
+    BinaryTreeNode(int data);
     BinaryTreeNode(int data, BinaryTreeNode* left, BinaryTreeNode* right);
     ~BinaryTreeNode();
     void SetData(int data);

@@ -9,6 +9,15 @@ BinaryTreeNode::BinaryTreeNode()
     std::cout << "Created node with null values!\r\n";
 }
 
+BinaryTreeNode::BinaryTreeNode(int data)
+{
+    this->data  = data;
+    std::cout << "Created node with:\r\n";
+    std::cout << "\tData = " << data << "\r\n";
+    std::cout << "\tLeft = nullptr\r\n";
+    std::cout << "\tRight = nullptr\r\n";
+}
+
 BinaryTreeNode::BinaryTreeNode(int data, BinaryTreeNode* left, BinaryTreeNode* right)
 {
     this->data  = data;
