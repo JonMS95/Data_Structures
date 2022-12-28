@@ -7,7 +7,7 @@
 class DoublyLinkedList
 {
 private:
-    DoublyLinkedNode* head;
+    std::shared_ptr<DoublyLinkedNode> head;
 public:
     DoublyLinkedList();
     ~DoublyLinkedList();

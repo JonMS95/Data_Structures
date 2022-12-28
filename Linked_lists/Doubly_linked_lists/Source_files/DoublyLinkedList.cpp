@@ -11,19 +11,19 @@ void DoublyLinkedList::InsertFirstNode(int data)
 {
     if(this->head == nullptr)
     {
-        this->head = new DoublyLinkedNode(data, nullptr, nullptr);
+        this->head = std::make_shared<DoublyLinkedNode>(data, nullptr, nullptr);
         return;
     }
 
     // Set first node's previous node as the one that's meant to be inserted.
-    DoublyLinkedNode* newNode = new DoublyLinkedNode(data, nullptr, this->head);
+    std::shared_ptr<DoublyLinkedNode> newNode = std::make_shared<DoublyLinkedNode>(data, nullptr, this->head);
     this->head->SetPrevNode(newNode);
     this->head = newNode;
 }
 
 void DoublyLinkedList::InsertFinalNode(int data)
 {
-    DoublyLinkedNode* newNode = new DoublyLinkedNode(data, nullptr, nullptr);
+    std::shared_ptr<DoublyLinkedNode> newNode = std::make_shared<DoublyLinkedNode>(data, nullptr, nullptr);
 
     // If list is currently empty:
     if(this->head == nullptr)
@@ -32,7 +32,7 @@ void DoublyLinkedList::InsertFinalNode(int data)
         return;
     }
 
-    DoublyLinkedNode* currentNode = this->head;
+    std::shared_ptr<DoublyLinkedNode> currentNode = this->head;
 
     while(currentNode->GetNextNode() != nullptr)
     {
@@ -48,7 +48,7 @@ void DoublyLinkedList::InsertFinalNode(int data)
 void DoublyLinkedList::DeleteNode(int offset)
 {
     int listLength = this->GetListLength();
-    DoublyLinkedNode* currentNode = this->head;
+    std::shared_ptr<DoublyLinkedNode> currentNode = this->head;
 
     if(listLength == 0)
     {
@@ -65,7 +65,7 @@ void DoublyLinkedList::DeleteNode(int offset)
     if(offset == 0)
     {
         this->head = this->head->GetNextNode();
-        delete currentNode;
+        // delete currentNode;
         return;
     }
 
@@ -76,12 +76,12 @@ void DoublyLinkedList::DeleteNode(int offset)
 
     currentNode->GetPrevNode()->SetNextNode(currentNode->GetNextNode());
     currentNode->GetNextNode()->SetPrevNode(currentNode->GetPrevNode());
-    delete currentNode;
+    // delete currentNode;
 }
 
 void DoublyLinkedList::PrintList()
 {
-    DoublyLinkedNode* currentNode = this->head;
+    std::shared_ptr<DoublyLinkedNode> currentNode = this->head;
     
     if(this->head == nullptr)
     {
@@ -100,7 +100,7 @@ void DoublyLinkedList::PrintList()
 int DoublyLinkedList::GetListLength()
 {
     int counter = 1;
-    DoublyLinkedNode* currentNode = this->head;
+    std::shared_ptr<DoublyLinkedNode> currentNode = this->head;
     
     if(this->head == nullptr)
     {
