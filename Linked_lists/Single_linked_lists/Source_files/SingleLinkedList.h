@@ -3,15 +3,17 @@
 
 #include "SingleLinkedNode.h"
 #include <cstddef>
+#include <memory>
 
 class SingleLinkedlist {
-    SingleLinkedNode* head;
+    std::shared_ptr<SingleLinkedNode> head;
 
 public:
     SingleLinkedlist();
-    void insertNode(int);
-    void printList();
-    void deleteNode(int);
+    std::shared_ptr<SingleLinkedNode> GetHead();
+    void InsertNode(int);
+    void PrintList();
+    void DeleteNode(int);
 };
 
 #endif

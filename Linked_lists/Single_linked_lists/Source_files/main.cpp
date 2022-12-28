@@ -12,33 +12,33 @@ int main()
 {
     SingleLinkedlist testList;
 
-    testList.insertNode(0);
-    testList.insertNode(1);
-    testList.insertNode(2);
-    testList.insertNode(4);
-    testList.insertNode(8);
+    testList.InsertNode(0);
+    testList.InsertNode(1);
+    testList.InsertNode(2);
+    testList.InsertNode(4);
+    testList.InsertNode(8);
 
-    testList.printList();
+    testList.PrintList();
 
-    testList.deleteNode(2);
+    testList.DeleteNode(2);
 
-    testList.printList();
+    testList.PrintList();
 
-    testList.deleteNode(0);
+    testList.DeleteNode(0);
 
-    testList.printList();
+    testList.PrintList();
 
-    testList.deleteNode(0);
+    testList.DeleteNode(0);
 
-    testList.printList();
+    testList.PrintList();
 
-    testList.deleteNode(0);
+    testList.DeleteNode(0);
 
-    testList.printList();
+    testList.PrintList();
 
-    testList.deleteNode(0);
+    testList.DeleteNode(0);
 
-    testList.printList();
+    testList.PrintList();
 
     return 0;
 }
