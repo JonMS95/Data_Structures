@@ -2,7 +2,7 @@
 #define DOUBLY_LINKED_LIST
 
 #include <iostream>
-#include "DoublyLinkedNode.h"
+#include "DoublyLinkedNode.hpp"
 
 class DoublyLinkedList
 {

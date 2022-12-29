@@ -1,7 +1,6 @@
 #include <cstddef>
 #include <iostream>
-#include "SingleLinkedNode.h"
-#include <memory>
+#include "SingleLinkedNode.hpp"
 
 SingleLinkedNode::SingleLinkedNode()
 {

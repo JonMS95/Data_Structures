@@ -6,7 +6,7 @@
 // space to store the pointer to the next node.
 // The first element in a linked list is also known as "head".
 #include <iostream>
-#include "SingleLinkedList.h"
+#include "SingleLinkedList.hpp"
 
 int main()
 {

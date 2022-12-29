@@ -1,7 +1,7 @@
 #ifndef SINGLE_LINKED_LIST
 #define SINGLE_LINKED_LIST
 
-#include "SingleLinkedNode.h"
+#include "SingleLinkedNode.hpp"
 #include <cstddef>
 #include <memory>
 
