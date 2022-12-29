@@ -18,7 +18,9 @@ BinaryTreeNode::BinaryTreeNode(int data)
     std::cout << "\tRight = nullptr\r\n";
 }
 
-BinaryTreeNode::BinaryTreeNode(int data, BinaryTreeNode* left, BinaryTreeNode* right)
+BinaryTreeNode::BinaryTreeNode( int data,
+                                std::shared_ptr<BinaryTreeNode> left,
+                                std::shared_ptr<BinaryTreeNode> right)
 {
     this->data  = data;
     this->left  = left;
@@ -39,12 +41,12 @@ void BinaryTreeNode::SetData(int data)
     this->data = data;
 }
 
-void BinaryTreeNode::SetLeftNode(BinaryTreeNode* left)
+void BinaryTreeNode::SetLeftNode(std::shared_ptr<BinaryTreeNode> left)
 {
     this->left = left;
 }
 
-void BinaryTreeNode::SetRightNode(BinaryTreeNode* right)
+void BinaryTreeNode::SetRightNode(std::shared_ptr<BinaryTreeNode> right)
 {
     this->right = right;
 }
@@ -54,12 +56,12 @@ int BinaryTreeNode::GetData()
     return this->data;
 }
 
-BinaryTreeNode* BinaryTreeNode::GetLeftNode()
+std::shared_ptr<BinaryTreeNode> BinaryTreeNode::GetLeftNode()
 {
     return this->left;
 }
 
-BinaryTreeNode* BinaryTreeNode::GetRightNode()
+std::shared_ptr<BinaryTreeNode> BinaryTreeNode::GetRightNode()
 {
     return this->right;
 }
