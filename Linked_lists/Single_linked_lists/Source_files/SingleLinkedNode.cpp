@@ -2,17 +2,13 @@
 #include <iostream>
 #include "SingleLinkedNode.hpp"
 
-SingleLinkedNode::SingleLinkedNode()
+SingleLinkedNode::SingleLinkedNode():data(0), next(NULL)
 {
-    this->data = 0;
-    this->next = NULL;
     std::cout << "Created node!\r\n";
 }
 
-SingleLinkedNode::SingleLinkedNode(int data)
+SingleLinkedNode::SingleLinkedNode(int data): data(data), next(NULL)
 {
-    this->data = data;
-    this->next = NULL;
     std::cout << "Created node!\r\n";
 }
 

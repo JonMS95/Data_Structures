@@ -1,18 +1,15 @@
 #include "DoublyLinkedNode.hpp"
 
-DoublyLinkedNode::DoublyLinkedNode()
+DoublyLinkedNode::DoublyLinkedNode(): data(0), next(nullptr), prev(nullptr)
 {
-    this->data = 0;
-    this->next = nullptr;
-    this->prev = nullptr;
     std::cout << "Created node!\r\n";
 }
 
 DoublyLinkedNode::DoublyLinkedNode( int data,
                                     std::shared_ptr<DoublyLinkedNode> prev,
                                     std::shared_ptr<DoublyLinkedNode> next)
+                                    :data(0)
 {
-    this->data = data;
     this->prev = prev;
     this->next = next;
     std::cout << "Created node!\r\n";
