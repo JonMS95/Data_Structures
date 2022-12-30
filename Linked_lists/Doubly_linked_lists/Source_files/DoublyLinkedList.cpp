@@ -1,9 +1,6 @@
 #include "DoublyLinkedList.hpp"
 
-DoublyLinkedList::DoublyLinkedList()
-{
-    this->head = nullptr;
-}
+DoublyLinkedList::DoublyLinkedList(): head(nullptr){}
 
 DoublyLinkedList::~DoublyLinkedList(){}
 

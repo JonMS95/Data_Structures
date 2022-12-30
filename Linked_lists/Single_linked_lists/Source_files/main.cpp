@@ -28,7 +28,7 @@ int main()
 
     testList.PrintList();
 
-    testList.DeleteNode(0);
+    testList.DeleteNode(2);
 
     testList.PrintList();
 

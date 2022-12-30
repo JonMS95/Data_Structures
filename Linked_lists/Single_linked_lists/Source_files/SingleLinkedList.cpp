@@ -1,10 +1,7 @@
 #include "SingleLinkedList.hpp"
 #include <iostream>
 
-SingleLinkedlist::SingleLinkedlist()
-{
-    this->head = NULL;
-}
+SingleLinkedlist::SingleLinkedlist():head(NULL){}
 
 // To insert a new node, first check if the head (i.e., the first element of the linked list) is null or not. If so, then place
 // the newly created node at this position. Note that linked lists are usually implemented in heap memory (as it's being done in
