@@ -33,7 +33,7 @@ void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node)
 
     while(q.empty() == false)
     {
-        std::cout << "Data:\t" << q.front()->GetData() << "\r\n";
+        std::cout << q.front()->GetData() << "\r\n";
         if(q.front()->GetLeftNode() != nullptr)
         {
             q.push(q.front()->GetLeftNode());
@@ -46,6 +46,7 @@ void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node)
     }
 }
 
+// Root-Left-Right
 void TraversePreOrder(std::shared_ptr<BinaryTreeNode> node)
 {
     std::cout << node->GetData() << "\r\n";
@@ -53,10 +54,43 @@ void TraversePreOrder(std::shared_ptr<BinaryTreeNode> node)
     {
         TraversePreOrder(node->GetLeftNode());
     }
+    
     if(node->GetRightNode() != nullptr)
     {
         TraversePreOrder(node->GetRightNode());
     }
+}
+
+// Left-Root-Right
+void TraverseInOrder(std::shared_ptr<BinaryTreeNode> node)
+{
+    if(node->GetLeftNode() != nullptr)
+    {
+        TraverseInOrder(node->GetLeftNode());
+    }
+
+    std::cout << node->GetData() << "\r\n";
+
+    if(node->GetRightNode() != nullptr)
+    {
+        TraverseInOrder(node->GetRightNode());
+    }
+}
+
+// Left-Right-Root
+void TraversePostOrder(std::shared_ptr<BinaryTreeNode> node)
+{
+    if(node->GetLeftNode() != nullptr)
+    {
+        TraversePostOrder(node->GetLeftNode());
+    }
+
+    if(node->GetRightNode() != nullptr)
+    {
+        TraversePostOrder(node->GetRightNode());
+    }
+
+    std::cout << node->GetData() << "\r\n";
 }
 
 int main()
@@ -73,9 +107,29 @@ int main()
 
     LevelOrderInsert(node1, 6);
 
+    std::cout << "**********************\r\n";
+    std::cout << "Level Order\r\n";
+    std::cout << "**********************\r\n";
+
     TraverseLevelOrder(node1);
 
+    std::cout << "**********************\r\n";
+    std::cout << "Pre Order\r\n";
+    std::cout << "**********************\r\n";
+
     TraversePreOrder(node1);
+
+    std::cout << "**********************\r\n";
+    std::cout << "In Order\r\n";
+    std::cout << "**********************\r\n";
+
+    TraverseInOrder(node1);
+
+    std::cout << "**********************\r\n";
+    std::cout << "Post Order\r\n";
+    std::cout << "**********************\r\n";
+
+    TraversePostOrder(node1);
 
     return 0;
 }
