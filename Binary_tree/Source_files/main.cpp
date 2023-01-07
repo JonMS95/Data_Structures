@@ -3,7 +3,7 @@
 #include <memory>
 #include <queue>
 
-void InsertNodeLevelOrder(std::shared_ptr<BinaryTreeNode> node, int data)
+void LevelOrderInsert(std::shared_ptr<BinaryTreeNode> node, int data)
 {
     std::queue<std::shared_ptr<BinaryTreeNode>> q;
     q.push(node);
@@ -26,7 +26,7 @@ void InsertNodeLevelOrder(std::shared_ptr<BinaryTreeNode> node, int data)
     }
 }
 
-void printNodesByLevel(std::shared_ptr<BinaryTreeNode> node)
+void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node)
 {
     std::queue<std::shared_ptr<BinaryTreeNode>> q;
     q.push(node);
@@ -46,6 +46,19 @@ void printNodesByLevel(std::shared_ptr<BinaryTreeNode> node)
     }
 }
 
+void TraversePreOrder(std::shared_ptr<BinaryTreeNode> node)
+{
+    std::cout << node->GetData() << "\r\n";
+    if(node->GetLeftNode() != nullptr)
+    {
+        TraversePreOrder(node->GetLeftNode());
+    }
+    if(node->GetRightNode() != nullptr)
+    {
+        TraversePreOrder(node->GetRightNode());
+    }
+}
+
 int main()
 {
     std::shared_ptr<BinaryTreeNode> node4 = std::make_shared<BinaryTreeNode>(4);
@@ -56,9 +69,13 @@ int main()
     std::shared_ptr<BinaryTreeNode> node5 = std::make_shared<BinaryTreeNode>(5);
     node2->SetRightNode(node5);
 
-    InsertNodeLevelOrder(node1, 6);
+    std::shared_ptr<BinaryTreeNode> root = node1;
 
-    printNodesByLevel(node1);
+    LevelOrderInsert(node1, 6);
+
+    TraverseLevelOrder(node1);
+
+    TraversePreOrder(node1);
 
     return 0;
 }
