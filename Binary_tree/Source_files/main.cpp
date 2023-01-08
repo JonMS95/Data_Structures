@@ -2,6 +2,11 @@
 #include <iostream>
 #include <memory>
 #include <queue>
+#include <cstdlib>
+#include <ctime>
+
+#define DATA_ALREADY_EXISTS         -1
+#define NODE_SUCCESSFULLY_INSERTED  0
 
 void LevelOrderInsert(std::shared_ptr<BinaryTreeNode> node, int data)
 {
@@ -23,6 +28,41 @@ void LevelOrderInsert(std::shared_ptr<BinaryTreeNode> node, int data)
         q.push(q.front()->GetLeftNode());
         q.push(q.front()->GetRightNode());
         q.pop();
+    }
+}
+
+int InsertBinarySearchTree(std::shared_ptr<BinaryTreeNode> node, int data)
+{
+    if(node == nullptr)
+    {
+        std::shared_ptr<BinaryTreeNode> newNode = std::make_shared<BinaryTreeNode>(data);
+        return NODE_SUCCESSFULLY_INSERTED;
+    }
+
+    int currentNodeData = node->GetData();
+
+    if(data < currentNodeData)
+    {
+        if (node->GetLeftNode() == nullptr)
+        {
+            node->SetLeftNode(std::make_shared<BinaryTreeNode>(data));
+            return NODE_SUCCESSFULLY_INSERTED;
+        }
+        return InsertBinarySearchTree(node->GetLeftNode(), data);
+    }
+    else if(data > currentNodeData)
+    {
+        if (node->GetRightNode() == nullptr)
+        {
+            node->SetRightNode(std::make_shared<BinaryTreeNode>(data));
+            return NODE_SUCCESSFULLY_INSERTED;
+        }
+        return InsertBinarySearchTree(node->GetRightNode(), data);
+    }
+    else
+    {
+        std::cout << "Data already found in a node of the BST.\r\n";
+        return DATA_ALREADY_EXISTS;
     }
 }
 
@@ -130,6 +170,21 @@ int main()
     std::cout << "**********************\r\n";
 
     TraversePostOrder(node1);
+
+    std::cout << "**********************\r\n";
+    std::cout << "Creating a BST now.\r\n";
+    std::cout << "**********************\r\n";
+
+    std::shared_ptr<BinaryTreeNode> BSTRootNode = std::make_shared<BinaryTreeNode>(50);
+
+    srand(time(NULL));
+    for(int i = 0; i < 10; i++)
+    {
+        int randomNumber_1_100 = rand()%100 + 1;
+        InsertBinarySearchTree(BSTRootNode, randomNumber_1_100);
+    }
+
+    TraverseInOrder(BSTRootNode);
 
     return 0;
 }
