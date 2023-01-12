@@ -68,6 +68,10 @@ int InsertBinarySearchTree(std::shared_ptr<BinaryTreeNode> node, int data)
 
 void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node)
 {
+    if(node == nullptr)
+    {
+        return;
+    }
     std::queue<std::shared_ptr<BinaryTreeNode>> q;
     q.push(node);
 
@@ -89,6 +93,11 @@ void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node)
 // Root-Left-Right
 void TraversePreOrder(std::shared_ptr<BinaryTreeNode> node)
 {
+    if(node == nullptr)
+    {
+        return;
+    }
+
     std::cout << node->GetData() << "\r\n";
     if(node->GetLeftNode() != nullptr)
     {
@@ -104,6 +113,11 @@ void TraversePreOrder(std::shared_ptr<BinaryTreeNode> node)
 // Left-Root-Right
 void TraverseInOrder(std::shared_ptr<BinaryTreeNode> node)
 {
+    if(node == nullptr)
+    {
+        return;
+    }
+
     if(node->GetLeftNode() != nullptr)
     {
         TraverseInOrder(node->GetLeftNode());
@@ -120,6 +134,11 @@ void TraverseInOrder(std::shared_ptr<BinaryTreeNode> node)
 // Left-Right-Root
 void TraversePostOrder(std::shared_ptr<BinaryTreeNode> node)
 {
+    if(node == nullptr)
+    {
+        return;
+    }
+
     if(node->GetLeftNode() != nullptr)
     {
         TraversePostOrder(node->GetLeftNode());
@@ -131,6 +150,42 @@ void TraversePostOrder(std::shared_ptr<BinaryTreeNode> node)
     }
 
     std::cout << node->GetData() << "\r\n";
+}
+
+void getNullityVector(std::shared_ptr<BinaryTreeNode> node, std::vector<bool>& nullityVector)
+{
+    if(node == nullptr)
+    {
+        nullityVector.push_back(false);
+        return;
+    }
+    std::queue<std::shared_ptr<BinaryTreeNode>> q;
+    q.push(node);
+    nullityVector.push_back(true);
+
+    while(q.empty() == false)
+    {
+        std::cout << q.front()->GetData() << "\r\n";
+        if(q.front()->GetLeftNode() != nullptr)
+        {
+            q.push(q.front()->GetLeftNode());
+            nullityVector.push_back(true);
+        }
+        else
+        {
+            nullityVector.push_back(false);
+        }
+        if(q.front()->GetRightNode() != nullptr)
+        {
+            q.push(q.front()->GetRightNode());
+            nullityVector.push_back(true);
+        }
+        else
+        {
+            nullityVector.push_back(false);
+        }
+        q.pop();
+    }
 }
 
 int main()
@@ -185,6 +240,33 @@ int main()
     }
 
     TraverseInOrder(BSTRootNode);
+
+    std::vector<bool> nullityVector;
+    getNullityVector(node1, nullityVector);
+
+    for(long unsigned int i = 0; i < nullityVector.size(); i++)
+    {
+        std::cout << nullityVector[i] << " ";
+    }
+
+    bool nullFound = false;
+
+    for(long unsigned int i = 0; i < nullityVector.size(); i++)
+    {
+        if(nullityVector[i] == false)
+        {
+            if(nullFound == true);
+        }
+        else
+        {
+            if(nullFound == true)
+            {
+                std::cout << "Incomplete Tree!";
+            }
+        }
+    }
+
+    std::cout << "\r\n";
 
     return 0;
 }
