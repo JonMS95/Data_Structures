@@ -90,68 +90,6 @@ void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node)
     }
 }
 
-// Root-Left-Right
-void TraversePreOrder(std::shared_ptr<BinaryTreeNode> node)
-{
-    if(node == nullptr)
-    {
-        return;
-    }
-
-    std::cout << node->GetData() << "\r\n";
-    if(node->GetLeftNode() != nullptr)
-    {
-        TraversePreOrder(node->GetLeftNode());
-    }
-    
-    if(node->GetRightNode() != nullptr)
-    {
-        TraversePreOrder(node->GetRightNode());
-    }
-}
-
-// Left-Root-Right
-void TraverseInOrder(std::shared_ptr<BinaryTreeNode> node)
-{
-    if(node == nullptr)
-    {
-        return;
-    }
-
-    if(node->GetLeftNode() != nullptr)
-    {
-        TraverseInOrder(node->GetLeftNode());
-    }
-
-    std::cout << node->GetData() << "\r\n";
-
-    if(node->GetRightNode() != nullptr)
-    {
-        TraverseInOrder(node->GetRightNode());
-    }
-}
-
-// Left-Right-Root
-void TraversePostOrder(std::shared_ptr<BinaryTreeNode> node)
-{
-    if(node == nullptr)
-    {
-        return;
-    }
-
-    if(node->GetLeftNode() != nullptr)
-    {
-        TraversePostOrder(node->GetLeftNode());
-    }
-
-    if(node->GetRightNode() != nullptr)
-    {
-        TraversePostOrder(node->GetRightNode());
-    }
-
-    std::cout << node->GetData() << "\r\n";
-}
-
 void getNullityVector(std::shared_ptr<BinaryTreeNode> node, std::vector<bool>& nullityVector)
 {
     if(node == nullptr)
@@ -188,6 +126,60 @@ void getNullityVector(std::shared_ptr<BinaryTreeNode> node, std::vector<bool>& n
     }
 }
 
+void printNodeData(std::shared_ptr<BinaryTreeNode> node)
+{
+    if(node == nullptr)
+    {
+        std::cout << "Null node!\r\n";
+        return;
+    }
+
+    std::cout << node->GetData() << "\r\n";
+}
+
+/// @brief Generic recursive function that behaves in pre, in or post order mode
+/// depending on the input parameter functions that are passed to it.
+/// @param node Current BT node
+/// @param preOrderFn Pre-order task
+/// @param inOrderFn In-order task
+/// @param postOrderFn Post-order task
+void BTRecursiveTraversal(std::shared_ptr<BinaryTreeNode> node,
+                         void (*preOrderFn)(std::shared_ptr<BinaryTreeNode> node),
+                         void (*inOrderFn)(std::shared_ptr<BinaryTreeNode> node),
+                         void (*postOrderFn)(std::shared_ptr<BinaryTreeNode> node)
+                        )
+{
+    if(node == nullptr)
+    {
+        return;
+    }
+
+    if(preOrderFn != nullptr)
+    {
+        preOrderFn(node);
+    }
+
+    if(node->GetLeftNode() != nullptr)
+    {
+        BTRecursiveTraversal(node->GetLeftNode(), preOrderFn, inOrderFn, postOrderFn);
+    }
+
+    if(inOrderFn != nullptr)
+    {
+        inOrderFn(node);
+    }
+
+    if(node->GetRightNode() != nullptr)
+    {
+        BTRecursiveTraversal(node->GetRightNode(), preOrderFn, inOrderFn, postOrderFn);
+    }
+
+    if(postOrderFn != nullptr)
+    {
+        postOrderFn(node);
+    }
+}
+
 int main()
 {
     std::shared_ptr<BinaryTreeNode> node4 = std::make_shared<BinaryTreeNode>(4);
@@ -212,19 +204,19 @@ int main()
     std::cout << "Pre Order\r\n";
     std::cout << "**********************\r\n";
 
-    TraversePreOrder(node1);
+    BTRecursiveTraversal(node1, printNodeData, nullptr, nullptr);
 
     std::cout << "**********************\r\n";
     std::cout << "In Order\r\n";
     std::cout << "**********************\r\n";
 
-    TraverseInOrder(node1);
+    BTRecursiveTraversal(node1, nullptr, printNodeData, nullptr);
 
     std::cout << "**********************\r\n";
     std::cout << "Post Order\r\n";
     std::cout << "**********************\r\n";
 
-    TraversePostOrder(node1);
+    BTRecursiveTraversal(node1, nullptr, nullptr, printNodeData);
 
     std::cout << "**********************\r\n";
     std::cout << "Creating a BST now.\r\n";
@@ -239,7 +231,7 @@ int main()
         InsertBinarySearchTree(BSTRootNode, randomNumber_1_100);
     }
 
-    TraverseInOrder(BSTRootNode);
+    BTRecursiveTraversal(BSTRootNode, nullptr, printNodeData, nullptr);
 
     std::vector<bool> nullityVector;
     getNullityVector(node1, nullityVector);
