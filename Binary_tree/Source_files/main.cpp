@@ -66,7 +66,8 @@ int InsertBinarySearchTree(std::shared_ptr<BinaryTreeNode> node, int data)
     }
 }
 
-void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node)
+void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node,
+                        void(*function)(void*))
 {
     if(node == nullptr)
     {
@@ -77,7 +78,11 @@ void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node)
 
     while(q.empty() == false)
     {
-        std::cout << q.front()->GetData() << "\r\n";
+        if(function != nullptr)
+        {
+            function(q.front().get());
+        }
+        
         if(q.front()->GetLeftNode() != nullptr)
         {
             q.push(q.front()->GetLeftNode());
@@ -90,20 +95,22 @@ void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node)
     }
 }
 
-void getNullityVector(std::shared_ptr<BinaryTreeNode> node, std::vector<bool>& nullityVector)
+bool IsBTComplete(std::shared_ptr<BinaryTreeNode> node)
 {
+    std::vector<bool> nullityVector;
+    bool previousValue = true;
+    std::queue<std::shared_ptr<BinaryTreeNode>> q;
+
     if(node == nullptr)
     {
-        nullityVector.push_back(false);
-        return;
+        return false;
     }
-    std::queue<std::shared_ptr<BinaryTreeNode>> q;
+
     q.push(node);
     nullityVector.push_back(true);
 
     while(q.empty() == false)
     {
-        std::cout << q.front()->GetData() << "\r\n";
         if(q.front()->GetLeftNode() != nullptr)
         {
             q.push(q.front()->GetLeftNode());
@@ -124,17 +131,63 @@ void getNullityVector(std::shared_ptr<BinaryTreeNode> node, std::vector<bool>& n
         }
         q.pop();
     }
+
+    for(long unsigned int i = 0; i < nullityVector.size(); i++)
+    {
+        if((previousValue == false) && (nullityVector[i] == true))
+        {
+            std::cout << "Tree is incomplete!\r\n";
+            return false;
+        }
+        previousValue = nullityVector[i];
+    }
+
+    return true;
 }
 
-void printNodeData(std::shared_ptr<BinaryTreeNode> node)
+void printNodeData(void* node)
 {
-    if(node == nullptr)
+    BinaryTreeNode* castedNode = (BinaryTreeNode*) node;
+
+    if(castedNode == nullptr)
     {
         std::cout << "Null node!\r\n";
         return;
     }
 
-    std::cout << node->GetData() << "\r\n";
+    std::cout << castedNode->GetData() << "\r\n";
+}
+
+int GetBTDepth(std::shared_ptr<BinaryTreeNode> node, int depth = 0, int currentCounter = 0)
+{
+    int dp = depth;
+    int cc = currentCounter;
+
+    if (node == nullptr)
+    {
+        return -1;
+    }
+
+    (cc)++;
+
+    if(cc >  dp)
+    {
+        dp = cc;
+    }
+
+    if (node->GetLeftNode() != nullptr)
+    {
+        dp = GetBTDepth(node->GetLeftNode(), dp, cc);
+    }
+
+    if (node->GetRightNode() != nullptr)
+    {
+        dp = GetBTDepth(node->GetRightNode(), dp, cc);
+    }
+
+    (cc)--;
+
+    return dp;
 }
 
 /// @brief Generic recursive function that behaves in pre, in or post order mode
@@ -144,9 +197,9 @@ void printNodeData(std::shared_ptr<BinaryTreeNode> node)
 /// @param inOrderFn In-order task
 /// @param postOrderFn Post-order task
 void BTRecursiveTraversal(std::shared_ptr<BinaryTreeNode> node,
-                         void (*preOrderFn)(std::shared_ptr<BinaryTreeNode> node),
-                         void (*inOrderFn)(std::shared_ptr<BinaryTreeNode> node),
-                         void (*postOrderFn)(std::shared_ptr<BinaryTreeNode> node)
+                         void (*preOrderFn)(void*),
+                         void (*inOrderFn)(void*),
+                         void (*postOrderFn)(void*)
                         )
 {
     if(node == nullptr)
@@ -156,7 +209,7 @@ void BTRecursiveTraversal(std::shared_ptr<BinaryTreeNode> node,
 
     if(preOrderFn != nullptr)
     {
-        preOrderFn(node);
+        preOrderFn(node.get());
     }
 
     if(node->GetLeftNode() != nullptr)
@@ -166,7 +219,7 @@ void BTRecursiveTraversal(std::shared_ptr<BinaryTreeNode> node,
 
     if(inOrderFn != nullptr)
     {
-        inOrderFn(node);
+        inOrderFn(node.get());
     }
 
     if(node->GetRightNode() != nullptr)
@@ -176,7 +229,7 @@ void BTRecursiveTraversal(std::shared_ptr<BinaryTreeNode> node,
 
     if(postOrderFn != nullptr)
     {
-        postOrderFn(node);
+        postOrderFn(node.get());
     }
 }
 
@@ -194,11 +247,15 @@ int main()
 
     LevelOrderInsert(node1, 6);
 
+    std::shared_ptr<BinaryTreeNode> node7 = std::make_shared<BinaryTreeNode>(7);
+
+    node3->GetLeftNode()->SetRightNode(node7);
+
     std::cout << "**********************\r\n";
     std::cout << "Level Order\r\n";
     std::cout << "**********************\r\n";
 
-    TraverseLevelOrder(node1);
+    TraverseLevelOrder(node1, printNodeData);
 
     std::cout << "**********************\r\n";
     std::cout << "Pre Order\r\n";
@@ -218,6 +275,8 @@ int main()
 
     BTRecursiveTraversal(node1, nullptr, nullptr, printNodeData);
 
+    std::cout << "Tree depth: " << GetBTDepth(node1) << "\r\n";
+
     std::cout << "**********************\r\n";
     std::cout << "Creating a BST now.\r\n";
     std::cout << "**********************\r\n";
@@ -233,30 +292,7 @@ int main()
 
     BTRecursiveTraversal(BSTRootNode, nullptr, printNodeData, nullptr);
 
-    std::vector<bool> nullityVector;
-    getNullityVector(node1, nullityVector);
-
-    for(long unsigned int i = 0; i < nullityVector.size(); i++)
-    {
-        std::cout << nullityVector[i] << " ";
-    }
-
-    bool nullFound = false;
-
-    for(long unsigned int i = 0; i < nullityVector.size(); i++)
-    {
-        if(nullityVector[i] == false)
-        {
-            if(nullFound == true);
-        }
-        else
-        {
-            if(nullFound == true)
-            {
-                std::cout << "Incomplete Tree!";
-            }
-        }
-    }
+    std::cout << "Is tree complete? " << IsBTComplete(node1) << "\r\n";
 
     std::cout << "\r\n";
 
