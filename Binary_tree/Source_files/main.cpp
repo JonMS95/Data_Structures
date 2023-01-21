@@ -136,7 +136,6 @@ bool IsBTComplete(std::shared_ptr<BinaryTreeNode> node)
     {
         if((previousValue == false) && (nullityVector[i] == true))
         {
-            std::cout << "Tree is incomplete!\r\n";
             return false;
         }
         previousValue = nullityVector[i];
