@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <ctime>
 
+#include "BinaryTree.hpp"
+
 #define DATA_ALREADY_EXISTS         -1
 #define NODE_SUCCESSFULLY_INSERTED  0
 
@@ -169,7 +171,7 @@ int GetBTDepth(std::shared_ptr<BinaryTreeNode> node, int depth = 0, int currentC
 
     (cc)++;
 
-    if(cc >  dp)
+    if(cc > dp)
     {
         dp = cc;
     }
@@ -234,21 +236,30 @@ void BTRecursiveTraversal(std::shared_ptr<BinaryTreeNode> node,
 
 int main()
 {
-    std::shared_ptr<BinaryTreeNode> node4 = std::make_shared<BinaryTreeNode>(4);
-    std::shared_ptr<BinaryTreeNode> node3 = std::make_shared<BinaryTreeNode>(3);
-    std::shared_ptr<BinaryTreeNode> node2 = std::make_shared<BinaryTreeNode>(2, node4, nullptr);
-    std::shared_ptr<BinaryTreeNode> node1 = std::make_shared<BinaryTreeNode>(1, node2, node3);
+    BinaryTree BT = BinaryTree(50);
 
-    std::shared_ptr<BinaryTreeNode> node5 = std::make_shared<BinaryTreeNode>(5);
-    node2->SetRightNode(node5);
+    srand(time(NULL));
+    for(int i = 0; i < 5; i++)
+    {
+        int randomNumber_1_100 = rand()%100 + 1;
+        BT.LevelOrderInsert(randomNumber_1_100);
+    }
 
-    std::shared_ptr<BinaryTreeNode> root = node1;
+    std::cout << "Level Order\r\n*************\r\n";
 
-    LevelOrderInsert(node1, 6);
+    BT.PrintLevelOrder();
 
-    std::shared_ptr<BinaryTreeNode> node7 = std::make_shared<BinaryTreeNode>(7);
+    std::cout << "Pre Order\r\n*************\r\n";
 
-    node3->GetLeftNode()->SetRightNode(node7);
+    BT.PrintPreOrder();
+
+    std::cout << "In Order\r\n*************\r\n";
+
+    BT.PrintInOrder();
+
+    std::cout << "Post Order\r\n*************\r\n";
+
+    BT.PrintPostOrder();
 
     return 0;
 }
