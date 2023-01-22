@@ -5,7 +5,6 @@
 class BinaryTree
 {
 private:
-    std::shared_ptr<BinaryTreeNode> root;
     void TraverseLevelOrder(void(*function)(void*));
     int GetDepth(std::shared_ptr<BinaryTreeNode> node, int depth, int currentCounter);
     static void printNodeData(void* node);
@@ -13,9 +12,16 @@ private:
                         void (*preOrderFn)(void*),
                         void (*inOrderFn)(void*),
                         void (*postOrderFn)(void*));
+
+protected:
+    std::shared_ptr<BinaryTreeNode> root;
+
 public:
+    BinaryTree();
     BinaryTree(int data);
     ~BinaryTree();
+    std::shared_ptr<BinaryTreeNode> GetRootValue();
+    void SetRootValue(int data);
     std::shared_ptr<BinaryTreeNode> GetBTRoot();
     bool IsBTComplete();
     int GetBTDepth();
@@ -23,5 +29,4 @@ public:
     void PrintPreOrder();
     void PrintInOrder();
     void PrintPostOrder();
-    void LevelOrderInsert(int data);
 };

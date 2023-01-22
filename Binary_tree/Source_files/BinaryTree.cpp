@@ -1,14 +1,27 @@
 #include "BinaryTree.hpp"
 
+BinaryTree::BinaryTree()
+{
+    this->root = std::make_shared<BinaryTreeNode>();
+    std::cout << "Created Null Binary Tree!\r\n";
+}
+
 BinaryTree::BinaryTree(int data)
 {
-    root = std::make_shared<BinaryTreeNode>(data);
+    this->root = std::make_shared<BinaryTreeNode>(data);
     std::cout << "Created Binary Tree!\r\n";
 }
 
-BinaryTree::~BinaryTree()
+BinaryTree::~BinaryTree(){}
+
+std::shared_ptr<BinaryTreeNode> BinaryTree::GetRootValue()
 {
-    std::cout << "Removed Binary Tree!\r\n";
+    return this->root;
+}
+
+void BinaryTree::SetRootValue(int data)
+{
+    this->root->SetData(data);
 }
 
 std::shared_ptr<BinaryTreeNode> BinaryTree::GetBTRoot()
@@ -198,29 +211,6 @@ void BinaryTree::PrintInOrder()
 void BinaryTree::PrintPostOrder()
 {
     this->BTRecursiveTraversal(this->root, nullptr, nullptr, this->printNodeData);
-}
-
-void BinaryTree::LevelOrderInsert(int data)
-{
-    std::queue<std::shared_ptr<BinaryTreeNode>> q;
-    q.push(this->root);
-
-    while(true)
-    {
-        if(q.front()->GetLeftNode() == nullptr)
-        {
-            q.front()->SetLeftNode(std::make_shared<BinaryTreeNode>(data));
-            return;
-        }
-        if(q.front()->GetRightNode() == nullptr)
-        {
-            q.front()->SetRightNode(std::make_shared<BinaryTreeNode>(data));
-            return;
-        }
-        q.push(q.front()->GetLeftNode());
-        q.push(q.front()->GetRightNode());
-        q.pop();
-    }
 }
 
 // void LevelOrderInsert(std::shared_ptr<BinaryTreeNode> node, int data);
