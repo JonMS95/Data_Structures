@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "BinaryTree.hpp"
+#include "LevelOrderBinaryTree.hpp"
 
 #define DATA_ALREADY_EXISTS         -1
 #define NODE_SUCCESSFULLY_INSERTED  0
@@ -13,6 +13,12 @@
 void LevelOrderInsert(std::shared_ptr<BinaryTreeNode> node, int data)
 {
     std::queue<std::shared_ptr<BinaryTreeNode>> q;
+
+    if(node == nullptr)
+    {
+        return;
+    }
+
     q.push(node);
 
     while(true)
@@ -236,7 +242,7 @@ void BTRecursiveTraversal(std::shared_ptr<BinaryTreeNode> node,
 
 int main()
 {
-    BinaryTree BT = BinaryTree(50);
+    LevelOrderBinaryTree BT(50);
 
     srand(time(NULL));
     for(int i = 0; i < 5; i++)
@@ -260,6 +266,8 @@ int main()
     std::cout << "Post Order\r\n*************\r\n";
 
     BT.PrintPostOrder();
+
+    std::cout << "Is tree complete?" << BT.IsBTComplete() << "\r\n";
 
     return 0;
 }
