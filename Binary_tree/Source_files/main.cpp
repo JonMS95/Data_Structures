@@ -250,50 +250,5 @@ int main()
 
     node3->GetLeftNode()->SetRightNode(node7);
 
-    std::cout << "**********************\r\n";
-    std::cout << "Level Order\r\n";
-    std::cout << "**********************\r\n";
-
-    TraverseLevelOrder(node1, printNodeData);
-
-    std::cout << "**********************\r\n";
-    std::cout << "Pre Order\r\n";
-    std::cout << "**********************\r\n";
-
-    BTRecursiveTraversal(node1, printNodeData, nullptr, nullptr);
-
-    std::cout << "**********************\r\n";
-    std::cout << "In Order\r\n";
-    std::cout << "**********************\r\n";
-
-    BTRecursiveTraversal(node1, nullptr, printNodeData, nullptr);
-
-    std::cout << "**********************\r\n";
-    std::cout << "Post Order\r\n";
-    std::cout << "**********************\r\n";
-
-    BTRecursiveTraversal(node1, nullptr, nullptr, printNodeData);
-
-    std::cout << "Tree depth: " << GetBTDepth(node1) << "\r\n";
-
-    std::cout << "**********************\r\n";
-    std::cout << "Creating a BST now.\r\n";
-    std::cout << "**********************\r\n";
-
-    std::shared_ptr<BinaryTreeNode> BSTRootNode = std::make_shared<BinaryTreeNode>(50);
-
-    srand(time(NULL));
-    for(int i = 0; i < 10; i++)
-    {
-        int randomNumber_1_100 = rand()%100 + 1;
-        InsertBinarySearchTree(BSTRootNode, randomNumber_1_100);
-    }
-
-    BTRecursiveTraversal(BSTRootNode, nullptr, printNodeData, nullptr);
-
-    std::cout << "Is tree complete? " << IsBTComplete(node1) << "\r\n";
-
-    std::cout << "\r\n";
-
     return 0;
 }
