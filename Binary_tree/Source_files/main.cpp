@@ -4,16 +4,17 @@
 
 #include "ProceduralBT.hpp"
 #include "LevelOrderBinaryTree.hpp"
+#include "BinarySearchTree.hpp"
 
 int main()
 {
-    LevelOrderBinaryTree BT(50);
+    BinarySearchTree BT(50);
 
     srand(time(NULL));
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 7; i++)
     {
         int randomNumber_1_100 = rand()%100 + 1;
-        BT.LevelOrderInsert(randomNumber_1_100);
+        BT.BSTInsert(randomNumber_1_100);
     }
 
     std::cout << "Level Order\r\n*************\r\n";

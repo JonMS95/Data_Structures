@@ -1,3 +1,6 @@
+#ifndef BINARY_TREE_HPP
+#define BINARY_TREE_HPP
+
 #include "BinaryTreeNode.hpp"
 #include <iostream>
 #include <queue>
@@ -30,3 +33,5 @@ public:
     void PrintInOrder();
     void PrintPostOrder();
 };
+
+#endif

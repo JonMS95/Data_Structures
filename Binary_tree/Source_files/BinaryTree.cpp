@@ -212,7 +212,3 @@ void BinaryTree::PrintPostOrder()
 {
     this->BTRecursiveTraversal(this->root, nullptr, nullptr, this->printNodeData);
 }
-
-// void LevelOrderInsert(std::shared_ptr<BinaryTreeNode> node, int data);
-
-// int InsertBinarySearchTree(std::shared_ptr<BinaryTreeNode> node, int data);
