@@ -31,6 +31,7 @@ public:
     void PrintPreOrder();
     void PrintInOrder();
     void PrintPostOrder();
+    std::vector<int> VectorBT();
 };
 
 #endif

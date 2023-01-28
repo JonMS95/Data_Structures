@@ -8,13 +8,13 @@
 
 int main()
 {
-    BinarySearchTree BT(50);
+    LevelOrderBinaryTree BT(50);
 
     srand(time(NULL));
     for(int i = 0; i < 7; i++)
     {
         int randomNumber_1_100 = rand()%100 + 1;
-        BT.BSTInsert(randomNumber_1_100);
+        BT.LevelOrderInsert(randomNumber_1_100);
     }
 
     std::cout << "Level Order\r\n*************\r\n";
@@ -34,6 +34,8 @@ int main()
     BT.PrintPostOrder();
 
     std::cout << "Is tree complete? " << BT.IsBTComplete() << "\r\n";
+
+    std::vector<int> ret = BT.VectorBT();
 
     return 0;
 }
