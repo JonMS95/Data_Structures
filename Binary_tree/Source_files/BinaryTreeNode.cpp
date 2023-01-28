@@ -43,7 +43,6 @@ void BinaryTreeNode::SetData(int data)
     this->data = data;
 }
 
-
 /// @brief Sets pointer to left child node.
 /// @param left Pointer to the node that's going to be set as left child.
 void BinaryTreeNode::SetLeftNode(std::shared_ptr<BinaryTreeNode> left)
@@ -57,7 +56,6 @@ void BinaryTreeNode::SetRightNode(std::shared_ptr<BinaryTreeNode> right)
 {
     this->right = right;
 }
-
 
 /// @brief Gets the data stored in the current node.
 /// @return Value of the data variable.
