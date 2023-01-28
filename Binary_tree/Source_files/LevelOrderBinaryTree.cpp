@@ -12,6 +12,9 @@ LevelOrderBinaryTree::LevelOrderBinaryTree(int data)
 
 LevelOrderBinaryTree::~LevelOrderBinaryTree(){}
 
+
+/// @brief Insert node in level order.
+/// @param data Value of the node that's meant to be set.
 void LevelOrderBinaryTree::LevelOrderInsert(int data)
 {
     std::queue<std::shared_ptr<BinaryTreeNode>> q;
