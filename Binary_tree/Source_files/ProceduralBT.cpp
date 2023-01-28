@@ -1,5 +1,8 @@
 #include "ProceduralBT.hpp"
 
+/// @brief Inserts the given node into the tree in level order.
+/// @param node The node to start with (usually, the LOBT root).
+/// @param data The data value that's meamt to be inserted.
 void LevelOrderInsert(std::shared_ptr<BinaryTreeNode> node, int data)
 {
     std::queue<std::shared_ptr<BinaryTreeNode>> q;
@@ -29,6 +32,10 @@ void LevelOrderInsert(std::shared_ptr<BinaryTreeNode> node, int data)
     }
 }
 
+/// @brief Insert a node in a BST.
+/// @param node The node to start with (usually, the root of the BST).
+/// @param data The data value of the node that's wanted to be inserted.
+/// @return 0 if the node was successfully inserted, -1 if the data already exists within the BST.
 int InsertBinarySearchTree(std::shared_ptr<BinaryTreeNode> node, int data)
 {
     if(node == nullptr)
@@ -64,6 +71,9 @@ int InsertBinarySearchTree(std::shared_ptr<BinaryTreeNode> node, int data)
     }
 }
 
+/// @brief Traverse BT in level order.
+/// @param node The node to start with.
+/// @param function A generic function pointer.
 void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node,
                         void(*function)(void*))
 {
@@ -93,6 +103,9 @@ void TraverseLevelOrder(std::shared_ptr<BinaryTreeNode> node,
     }
 }
 
+/// @brief Tells whether if the current tree is complete or not.
+/// @param node The node to start with.
+/// @return True if the tree is complete, false otherwise.
 bool IsBTComplete(std::shared_ptr<BinaryTreeNode> node)
 {
     std::vector<bool> nullityVector;
@@ -155,6 +168,11 @@ void printNodeData(void* node)
     std::cout << castedNode->GetData() << "\r\n";
 }
 
+/// @brief 
+/// @param node 
+/// @param depth 
+/// @param currentCounter 
+/// @return 
 int GetBTDepth(std::shared_ptr<BinaryTreeNode> node, int depth = 0, int currentCounter = 0)
 {
     int dp = depth;
