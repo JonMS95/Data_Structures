@@ -28,6 +28,8 @@ std::shared_ptr<BinaryTreeNode> BinaryTree::GetBTRoot()
     return this->root;
 }
 
+/// @brief Traverse BT in level order.
+/// @param function Some generic function pointer.
 void BinaryTree::TraverseLevelOrder(void(*function)(void*))
 {
     if(this->root == nullptr)
@@ -56,6 +58,8 @@ void BinaryTree::TraverseLevelOrder(void(*function)(void*))
     }
 }
 
+/// @brief Check whether if the BT is complete or not.
+/// @return True if the BT is complete, false otherwise.
 bool BinaryTree::IsBTComplete()
 {
     std::vector<bool> nullityVector;
@@ -105,6 +109,11 @@ bool BinaryTree::IsBTComplete()
     return true;
 }
 
+/// @brief Get the depth of the BT.
+/// @param node Node to start with (usually, the root node of the BT).
+/// @param depth Maximum depth of the current function call.
+/// @param currentCounter Current depth counter.
+/// @return Depth of the BT.
 int BinaryTree::GetDepth(std::shared_ptr<BinaryTreeNode> node, int depth = 0, int currentCounter = 0)
 {
     int dp = depth;
@@ -137,11 +146,15 @@ int BinaryTree::GetDepth(std::shared_ptr<BinaryTreeNode> node, int depth = 0, in
     return dp;
 }
 
+/// @brief GetDepth method wrapper.
+/// @return Depth of the BT.
 int BinaryTree::GetBTDepth()
 {
     return this->GetDepth(this->root, 0, 0);
 }
 
+/// @brief Function that prints the data within a BT node.
+/// @param node Node which data is meant to be printed.
 void BinaryTree::printNodeData(void* node)
 {
     BinaryTreeNode* castedNode = (BinaryTreeNode*) node;
@@ -155,6 +168,11 @@ void BinaryTree::printNodeData(void* node)
     std::cout << castedNode->GetData() << "\r\n";
 }
 
+/// @brief Generic recursive traversal function for BT.
+/// @param node Node to start with (usually, BT root node).
+/// @param preOrderFn Generic function to be called in pre-order approach.
+/// @param inOrderFn Generic function to be called in in-order approach.
+/// @param postOrderFn Generic function to be called in post-order approach.
 void BinaryTree::BTRecursiveTraversal(std::shared_ptr<BinaryTreeNode> node,
                          void (*preOrderFn)(void*),
                          void (*inOrderFn)(void*),
@@ -192,21 +210,25 @@ void BinaryTree::BTRecursiveTraversal(std::shared_ptr<BinaryTreeNode> node,
     }
 }
 
+/// @brief Prints the data within every node in the BT in Level Order.
 void BinaryTree::PrintLevelOrder()
 {
     this->TraverseLevelOrder(this->printNodeData);
 }
 
+/// @brief Prints the data within every node in the BT in Pre-Order approach.
 void BinaryTree::PrintPreOrder()
 {
     this->BTRecursiveTraversal(this->root, this->printNodeData, nullptr, nullptr);
 }
 
+/// @brief Prints the data within every node in the BT in In-Order approach.
 void BinaryTree::PrintInOrder()
 {
     this->BTRecursiveTraversal(this->root, nullptr, this->printNodeData, nullptr);
 }
 
+/// @brief Prints the data within every node in the BT in Post-Order approach.
 void BinaryTree::PrintPostOrder()
 {
     this->BTRecursiveTraversal(this->root, nullptr, nullptr, this->printNodeData);
