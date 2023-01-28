@@ -15,6 +15,10 @@ BinarySearchTree::BinarySearchTree(int data)
 
 BinarySearchTree::~BinarySearchTree(){}
 
+/// @brief A procedural BST insert implementation. This static method will remain as private.
+/// @param node The node to start with (usually, the root of the BST).
+/// @param data The data value that's emant to be inserted.
+/// @return 0 if the node was successfully inserted, -1 if the data already exists.
 int BinarySearchTree::ProceduralBSTInsert(std::shared_ptr<BinaryTreeNode> node, int data)
 {
     if(node == nullptr)
@@ -50,6 +54,9 @@ int BinarySearchTree::ProceduralBSTInsert(std::shared_ptr<BinaryTreeNode> node, 
     }
 }
 
+/// @brief Inserts a node in the BST.
+/// @param data The data value that's wanted to be inserted within the BST.
+/// @return 0 if the node was successfully inserted, -1 if the data already exists.
 int BinarySearchTree::BSTInsert(int data)
 {
     return ProceduralBSTInsert(this->root, data);
