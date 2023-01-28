@@ -233,3 +233,32 @@ void BinaryTree::PrintPostOrder()
 {
     this->BTRecursiveTraversal(this->root, nullptr, nullptr, this->printNodeData);
 }
+
+std::vector<int> BinaryTree::VectorBT()
+{
+    std::vector<int> ret;
+
+    if(this->GetBTRoot() == nullptr)
+    {
+        return ret;
+    }
+    std::queue<std::shared_ptr<BinaryTreeNode>> q;
+    q.push(this->root);
+
+    while(q.empty() == false)
+    {
+        ret.emplace_back(q.front().get()->GetData());
+
+        if(q.front()->GetLeftNode() != nullptr)
+        {
+            q.push(q.front()->GetLeftNode());
+        }
+        if(q.front()->GetRightNode() != nullptr)
+        {
+            q.push(q.front()->GetRightNode());
+        }
+        q.pop();
+    }
+
+    return ret;
+}
