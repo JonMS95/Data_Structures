@@ -24,7 +24,7 @@ void LevelOrderBinaryTree::LevelOrderInsert(int data)
         return;
     }
     
-    q.push(this->GetRootValue());
+    q.push(this->GetBTRoot());
 
     while(true)
     {

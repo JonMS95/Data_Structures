@@ -23,7 +23,6 @@ public:
     BinaryTree();
     BinaryTree(int data);
     ~BinaryTree();
-    std::shared_ptr<BinaryTreeNode> GetRootValue();
     void SetRootValue(int data);
     std::shared_ptr<BinaryTreeNode> GetBTRoot();
     bool IsBTComplete();

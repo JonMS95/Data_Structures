@@ -14,16 +14,15 @@ BinaryTree::BinaryTree(int data)
 
 BinaryTree::~BinaryTree(){}
 
-std::shared_ptr<BinaryTreeNode> BinaryTree::GetRootValue()
-{
-    return this->root;
-}
-
+/// @brief BT root value setter.
+/// @param data Target value for the BT root.
 void BinaryTree::SetRootValue(int data)
 {
     this->root->SetData(data);
 }
 
+/// @brief Get root of the BT.
+/// @return Pointer to BT root.
 std::shared_ptr<BinaryTreeNode> BinaryTree::GetBTRoot()
 {
     return this->root;
