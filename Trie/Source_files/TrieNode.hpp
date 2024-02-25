@@ -5,6 +5,7 @@
 #include <memory>
 #include <iostream>
 #include <string>
+#include <cctype>
 
 class TrieNode
 {
@@ -22,7 +23,7 @@ public:
 
     char getTrieNodeLetter(void);
     void addPendingNode(char c);
-    std::shared_ptr<TrieNode> pendingNodeExists(char c);
+    std::shared_ptr<TrieNode> getPendingNode(char c, bool case_sensitive);
 };
 
 #endif
