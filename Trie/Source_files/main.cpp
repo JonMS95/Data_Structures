@@ -1,10 +1,11 @@
-#include <memory>
-#include "TrieNode.hpp"
 #include "Trie.hpp"
 
 int main()
 {
-    TrieNode tn1('a', {'b', 'c'});
-
-    Trie t;
+    Trie t(true);
+    t.insertString("and"    );
+    t.insertString("ant"    );
+    t.insertString("dad"    );
+    t.insertString("do"     );
+    t.insertString("dance"  );
 }
