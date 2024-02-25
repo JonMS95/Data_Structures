@@ -4,7 +4,7 @@ std::string TrieNode::getPendingNodesAsString(void)
 {
     std::string ret = "{";
     
-    for(int i = 0; i < this->pending_nodes.size(); i++)
+    for(unsigned long int i = 0; i < this->pending_nodes.size(); i++)
     {
         ret += pending_nodes[i]->getTrieNodeLetter();
 
@@ -50,11 +50,21 @@ void TrieNode::addPendingNode(char c)
     this->pending_nodes.emplace_back(std::make_shared<TrieNode>(c));
 }
 
-std::shared_ptr<TrieNode> TrieNode::pendingNodeExists(char c)
+std::shared_ptr<TrieNode> TrieNode::getPendingNode(char c, bool case_sensitive)
 {
-    for(int i = 0; i < this->pending_nodes.size(); i++)
-        if(c == this->pending_nodes[i]->letter)
+    for(unsigned long int i = 0; i < this->pending_nodes.size(); i++)
+    {
+        char current_letter = this->pending_nodes[i]->letter;
+
+        if(!case_sensitive)
+        {
+            c = std::tolower(c);
+            current_letter = std::tolower(current_letter);
+        }
+
+        if(c == current_letter)
             return this->pending_nodes[i];
+    }
 
     return nullptr;
 }
