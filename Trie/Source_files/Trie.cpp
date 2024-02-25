@@ -1,8 +1,8 @@
 #include "Trie.hpp"
 
-Trie::Trie(void): root(std::make_shared<TrieNode>('\0'))
+Trie::Trie(bool is_case_sensitive): root(std::make_shared<TrieNode>('\0')), case_sensitive(is_case_sensitive)
 {
-    std::cout << "Created new trie." << std::endl;
+    std::cout << "Created new trie. Case sensitivity: " << (is_case_sensitive ? "en" : "dis") << "abled." << std::endl;
 }
 
 Trie::~Trie(void)
@@ -10,21 +10,26 @@ Trie::~Trie(void)
     std::cout << "Destroyed trie." << std::endl;
 }
 
-void Trie::insertStringInTrie(  std::string& s                          ,
+void Trie::insertStringInTrie(  const std::string& s                    ,
                                 std::shared_ptr<TrieNode> current_node  ,
-                                int current_index                       )
+                                long unsigned int current_index         )
 {
-    std::shared_ptr<TrieNode> tn = current_node->pendingNodeExists(s[current_index]);
-    if(tn != nullptr)
-        this->insertStringInTrie(s, tn, ++current_index);
-    else
+    if(current_index >= s.size())
+        return;
+    
+    std::shared_ptr<TrieNode> tn = current_node->getPendingNode(s[current_index], this->case_sensitive);
+
+    if(tn == nullptr)
     {
         current_node->addPendingNode(s[current_index]);
-        this->insertStringInTrie(s, current_node->pendingNodeExists(s[current_index]), ++current_index);
+        tn = current_node->getPendingNode(s[current_index], this->case_sensitive);
     }
+    
+    ++current_index;
+    this->insertStringInTrie(s, tn, current_index);
 }
 
-void Trie::insertString(std::string s)
+void Trie::insertString(const std::string s)
 {
-    this->insertStringInTrie(s, this->root, 0);
+    this->insertStringInTrie(s, this->root);
 }
