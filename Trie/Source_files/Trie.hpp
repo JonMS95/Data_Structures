@@ -3,23 +3,24 @@
 
 #include <memory>
 #include <vector>
+#include <string>
 #include "TrieNode.hpp"
 
 class Trie
 {
 private:
     std::shared_ptr<TrieNode> root;
-    std::vector<std::shared_ptr<TrieNode>> pending_nodes;
+    bool case_sensitive;
 
-    void insertStringInTrie(std::string& s                          ,
+    void insertStringInTrie(const std::string& s                    ,
                             std::shared_ptr<TrieNode> current_node  ,
-                            int current_index = 0                   );
+                            long unsigned current_index = 0         );
 
 public:
-    Trie(void);
+    Trie(bool is_case_sensitive = true);
     virtual ~Trie(void);
 
-    void insertString(std::string s);
+    void insertString(const std::string s);
 };
 
 #endif
