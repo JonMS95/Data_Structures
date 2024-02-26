@@ -1,6 +1,6 @@
 #include "Trie.hpp"
 
-Trie::Trie(bool is_case_sensitive): root(std::make_shared<TrieNode>('\0')), case_sensitive(is_case_sensitive)
+Trie::Trie(const bool is_case_sensitive): root(std::make_shared<TrieNode>('\0')), case_sensitive(is_case_sensitive)
 {
     std::cout << "Created new trie. Case sensitivity: " << (is_case_sensitive ? "en" : "dis") << "abled." << std::endl;
 }
