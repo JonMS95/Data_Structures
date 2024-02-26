@@ -8,4 +8,6 @@ int main()
     t.insertString("dad"    );
     t.insertString("do"     );
     t.insertString("dance"  );
+    t.insertString("dank"   );
+    t.insertString("dank"   );
 }
