@@ -1,43 +1,58 @@
 #include "TrieNode.hpp"
 
-std::string TrieNode::getPendingNodesAsString(void)
-{
-    std::string ret = "{";
-    
-    for(unsigned long int i = 0; i < this->pending_nodes.size(); i++)
-    {
-        ret += pending_nodes[i]->getTrieNodeLetter();
-
-        if(i < (this->pending_nodes.size() - 1) )
-            ret += ", ";
-    }
-
-    ret += '}';
-
-    return ret;
-}
-
-TrieNode::TrieNode(char c): letter(c)
+TrieNode::TrieNode(char c, bool case_sensitive): letter(c), case_sensitive(case_sensitive)
 {
     std::cout << "Created Trie node with letter \'" << this->letter << "\' and no pending nodes." << std::endl;
 }
 
-TrieNode::TrieNode(char c, std::vector<std::shared_ptr<TrieNode>> nodes): letter(c), pending_nodes(nodes)
+TrieNode::TrieNode(char c, std::vector<char> pending_letters, bool case_sensitive): letter(c), case_sensitive(case_sensitive)
 {
-    std::cout << "Created Trie node with letter \'" << this->letter << "\' and a set of pending nodes." << std::endl;
-}
-
-TrieNode::TrieNode(char c, std::vector<char> nodes): letter(c)
-{
-    for(char n:nodes)
-        this->pending_nodes.emplace_back(std::make_shared<TrieNode>(n));
-    
-    std::cout << "Created Trie node with letter \'" << this->letter << "\' and a set of pending nodes." << std::endl;
+    for(char p_letter:pending_letters)
+        this->addPendingNode(p_letter);
 }
 
 TrieNode::~TrieNode()
 {
-    std::cout << "Deleted node with letter \'" << this->letter << "\' and " << (this->pending_nodes.size() == 0 ? "no" : this->getPendingNodesAsString()) << " pending nodes." << std::endl;
+    std::cout << "Deleted node with letter \'" << this->letter << "\' and " << (this->pending_letters.size() == 0 ? "no" : this->getPendingNodesAsString()) << " pending nodes." << std::endl;
+}
+
+TrieNode::TrieNode(const TrieNode& tn): letter(tn.letter), case_sensitive(tn.case_sensitive)
+{
+    for(auto it = tn.pending_letters.begin(); it != tn.pending_letters.end(); it++)
+        this->addPendingNode(it->first);
+    
+    // for(auto it = this->pending_letters.begin(); it != this->pending_letters.end(); it++)
+    //     TrieNode
+}
+
+void TrieNode::addPendingNode(char c)
+{
+    if(!this->case_sensitive)
+        c = std::tolower(c);
+    
+    if(!this->pending_letters.count(c))
+        this->pending_letters[c] = std::make_shared<TrieNode>(c, this->case_sensitive);
+}
+
+std::string TrieNode::getPendingNodesAsString(void)
+{
+    std::string ret = "{";
+
+    std::map<char, std::shared_ptr<TrieNode>>::iterator it;
+    std::map<char, std::shared_ptr<TrieNode>>::iterator it_last = this->pending_letters.end();
+    --it_last;
+
+    for(it = this->pending_letters.begin(); it != it_last; it++)
+    {
+        ret += it->first;
+        ret += ", ";
+    }
+
+    ret += it_last->first;
+
+    ret += '}';
+
+    return ret;
 }
 
 char TrieNode::getTrieNodeLetter(void)
@@ -45,26 +60,13 @@ char TrieNode::getTrieNodeLetter(void)
     return this->letter;
 }
 
-void TrieNode::addPendingNode(char c)
+std::shared_ptr<TrieNode> TrieNode::getPendingLetter(char c)
 {
-    this->pending_nodes.emplace_back(std::make_shared<TrieNode>(c));
-}
-
-std::shared_ptr<TrieNode> TrieNode::getPendingNode(char c, bool case_sensitive)
-{
-    for(unsigned long int i = 0; i < this->pending_nodes.size(); i++)
-    {
-        char current_letter = this->pending_nodes[i]->letter;
-
-        if(!case_sensitive)
-        {
-            c = std::tolower(c);
-            current_letter = std::tolower(current_letter);
-        }
-
-        if(c == current_letter)
-            return this->pending_nodes[i];
-    }
-
-    return nullptr;
+    if(!this->case_sensitive)
+        c = std::tolower(c);
+    
+    if(!this->pending_letters.count(c))
+        return nullptr;
+    
+    return this->pending_letters[c];
 }
