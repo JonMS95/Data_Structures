@@ -10,7 +10,6 @@ class Trie
 {
 private:
     std::shared_ptr<TrieNode> root;
-    const bool case_sensitive;
 
     void insertStringInTrie(const std::string& s                    ,
                             std::shared_ptr<TrieNode> current_node  ,
@@ -19,6 +18,7 @@ private:
 public:
     Trie(const bool is_case_sensitive = true);
     virtual ~Trie(void);
+    Trie(Trie& t);
 
     void insertString(const std::string s);
 };
