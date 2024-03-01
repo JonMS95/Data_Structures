@@ -1,8 +1,9 @@
 #include "Trie.hpp"
+#include "TrieNode.hpp"
 
 int main()
 {
-    Trie t(true);
+    Trie t(false);
     t.insertString("and"    );
     t.insertString("ant"    );
     t.insertString("dad"    );
@@ -10,4 +11,6 @@ int main()
     t.insertString("dance"  );
     t.insertString("dank"   );
     t.insertString("dank"   );
+
+    Trie t2(t);
 }
