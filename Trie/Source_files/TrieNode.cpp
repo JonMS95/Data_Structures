@@ -11,22 +11,23 @@ TrieNode::TrieNode(char c, std::vector<char> pending_letters, bool case_sensitiv
         this->addPendingNode(p_letter);
 }
 
+TrieNode::TrieNode(const TrieNode& other): letter(other.letter), case_sensitive(other.case_sensitive)
+{
+    // Copy the pending_letters map
+    for (const auto& pair : other.pending_letters) {
+        char c = pair.first;
+        std::shared_ptr<TrieNode> child = std::make_shared<TrieNode>(*pair.second); // Recursive deep copy
+        this->pending_letters[c] = child;
+    }
+}
+
 TrieNode::~TrieNode()
 {
     std::cout << "Deleted node with letter \'" << this->letter << "\' and " << (this->pending_letters.size() == 0 ? "no" : this->getPendingNodesAsString()) << " pending nodes." << std::endl;
 }
 
-TrieNode::TrieNode(const TrieNode& tn): letter(tn.letter), case_sensitive(tn.case_sensitive)
-{
-    for(auto it = tn.pending_letters.begin(); it != tn.pending_letters.end(); it++)
-        this->addPendingNode(it->first);
-    
-    // for(auto it = this->pending_letters.begin(); it != this->pending_letters.end(); it++)
-    //     TrieNode
-}
-
 void TrieNode::addPendingNode(char c)
-{
+{    
     if(!this->case_sensitive)
         c = std::tolower(c);
     
@@ -49,7 +50,6 @@ std::string TrieNode::getPendingNodesAsString(void)
     }
 
     ret += it_last->first;
-
     ret += '}';
 
     return ret;
