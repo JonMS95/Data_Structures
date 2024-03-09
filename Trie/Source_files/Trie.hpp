@@ -17,8 +17,8 @@ private:
 
 public:
     Trie(const bool is_case_sensitive = true);
+    Trie(const Trie& t);
     virtual ~Trie(void);
-    Trie(Trie& t);
 
     void insertString(const std::string s);
 };
