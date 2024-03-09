@@ -1,5 +1,4 @@
 #include "Trie.hpp"
-#include "TrieNode.hpp"
 
 int main()
 {
