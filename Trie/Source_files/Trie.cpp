@@ -37,3 +37,60 @@ void Trie::insertString(const std::string s)
 {
     this->insertStringInTrie(s, this->root);
 }
+
+void Trie::getAllStringsInTrie( std::shared_ptr<TrieNode> current_node      ,
+                                std::string& current_string                 ,
+                                std::vector<std::string>& strings_in_trie   )
+{
+    current_string += current_node->getTrieNodeLetter();
+
+    if(current_node->getShallowPendingChars().size() != 0)
+        for(char c:current_node->getShallowPendingChars())
+            this->getAllStringsInTrie(current_node->getPendingLetter(c), current_string, strings_in_trie);
+    else
+        strings_in_trie.emplace_back(current_string);
+    
+    if(current_string.size() > 0)
+        current_string.pop_back();
+}
+
+std::shared_ptr<TrieNode> Trie::getlastNodeFromStartingString(std::shared_ptr<TrieNode> current_node, const std::string& starting_string, unsigned int current_index)
+{
+    if(current_node == nullptr)
+        return nullptr;
+
+    if(current_index < starting_string.size())
+    {
+        for(char c:current_node->getShallowPendingChars())
+            if(c == starting_string[current_index])
+            {
+                ++current_index;
+                return this->getlastNodeFromStartingString(current_node->getPendingLetter(c), starting_string, current_index);
+            }
+    }
+
+    return current_node;
+}
+
+// std::vector<std::string> Trie::getAllStringsFromStartingNode(std::shared_ptr<TrieNode> current_node, std::string& starting_string, unsigned int current_index = 0)
+// {
+//     if(current_node)
+//     if(current_node->getShallowPendingChars().size() != 0)
+//     for(char c:current_node->getShallowPendingChars())
+//         if(c == starting_string[current_index])
+//         {
+//             ++current_index;
+//             this->getAllStringsFromStartingNode(current_node->getPendingLetter(c), starting_string, current_index);
+//         }
+// }
+
+std::vector<std::string> Trie::getAllStrings(void)
+{
+    std::vector<std::string> strings_in_trie;
+    std::string current_string = "";
+    
+    for(char c:this->root->getShallowPendingChars())
+        this->getAllStringsInTrie(this->root->getPendingLetter(c), current_string, strings_in_trie);
+    
+    return strings_in_trie;
+}
