@@ -70,3 +70,14 @@ std::shared_ptr<TrieNode> TrieNode::getPendingLetter(char c)
     
     return this->pending_letters[c];
 }
+
+std::vector<char> TrieNode::getShallowPendingChars(void)
+{
+    std::vector<char> shallow_pending_chars(this->pending_letters.size());
+    unsigned int index = 0;
+
+    for(auto it = this->pending_letters.begin(); it != this->pending_letters.end(); it++)
+        shallow_pending_chars[index++] = it->first;
+    
+    return shallow_pending_chars;
+}
