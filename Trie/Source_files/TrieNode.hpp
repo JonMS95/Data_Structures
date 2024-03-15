@@ -27,6 +27,7 @@ public:
     void addPendingNode(char c);
     std::shared_ptr<TrieNode> getPendingLetter(char c);
     std::vector<char> getShallowPendingChars(void);
+    void removePendingLetters(void);
 };
 
 #endif

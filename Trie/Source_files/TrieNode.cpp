@@ -81,3 +81,9 @@ std::vector<char> TrieNode::getShallowPendingChars(void)
     
     return shallow_pending_chars;
 }
+
+void TrieNode::removePendingLetters(void)
+{
+    std::cout << "Removing all pending nodes for node with letter \"" << this->letter << "\"" << std::endl;
+    this->pending_letters.clear();
+}
