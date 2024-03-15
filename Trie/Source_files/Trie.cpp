@@ -45,6 +45,9 @@ std::shared_ptr<TrieNode> Trie::getlastNodeFromStartingString(std::shared_ptr<Tr
 
     if(current_index < starting_string.size())
     {
+        if(current_node->getPendingLetter(starting_string[current_index]) == nullptr)
+            return this->root;
+        
         for(char c:current_node->getShallowPendingChars())
             if(c == starting_string[current_index])
             {
@@ -69,7 +72,7 @@ void Trie::getAllStringsFromStartingNode(   std::shared_ptr<TrieNode> current_no
         strings_in_trie.emplace_back(current_string);
     
     if(current_string.size() > 0)
-            current_string.pop_back();
+        current_string.pop_back();
 }
 
 std::vector<std::string> Trie::getAllStringsFromStartingString(std::string starting_string)
@@ -78,12 +81,13 @@ std::vector<std::string> Trie::getAllStringsFromStartingString(std::string start
 
     std::shared_ptr<TrieNode> starting_node = this->getlastNodeFromStartingString(this->root, starting_string);
 
+    // If the starting node is root (default return value), but the starting string is not empty, then it means starting string could not be found within the trie structure.
+    if(starting_node == this->root && starting_string != "")
+        return strings_in_trie;
+
     if(starting_node->getShallowPendingChars().size() != 0)
         for(char c:starting_node->getShallowPendingChars())
             this->getAllStringsFromStartingNode(starting_node->getPendingLetter(c), starting_string, strings_in_trie);
-
-    if(starting_node != this->root)
-        strings_in_trie.emplace_back(starting_string);
 
     return strings_in_trie;
 }
