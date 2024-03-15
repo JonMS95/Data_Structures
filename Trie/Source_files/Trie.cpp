@@ -96,3 +96,9 @@ std::vector<std::string> Trie::getAllStringsInTrie(void)
 {
     return this->getAllStringsFromStartingString();
 }
+
+void Trie::clear(void)
+{
+    std::cout << "Cleaning trie with root at " << this->root << std::endl;
+    this->root->removePendingLetters();
+}

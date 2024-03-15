@@ -31,6 +31,7 @@ public:
     void insertString(const std::string s);
     std::vector<std::string> getAllStringsInTrie(void);
     std::vector<std::string> getAllStringsFromStartingString(std::string starting_string = "");
+    void clear(void);
 };
 
 #endif
